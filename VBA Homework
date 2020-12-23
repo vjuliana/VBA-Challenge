@@ -58,6 +58,20 @@ Dim Ticker_Name As String
         
             ' Print the Yearly Change Amount $ for a Ticker band to the Summary table
             Range("J" & Summary_Table).Value = Ticker_Yearly_Change
+            
+            ' Conditional formating = if negative then red, if positive then green
+            
+            If Ticker_Yearly_Change < 0 Then
+            
+            ' Red
+            Range("J" & Summary_Table).Interior.ColorIndex = 3
+            
+            Else
+            
+            ' Green
+            Range("J" & Summary_Table).Interior.ColorIndex = 4
+            
+            End If
       
     ' Calculate Percentage Change
             ' Formula = ((Close Value Year End / Open Value Year Begin) -1) * 100
@@ -65,6 +79,7 @@ Dim Ticker_Name As String
       
             ' Print the Percentage Change for a Ticker to the Summary table
             Range("K" & Summary_Table).Value = Ticker_Percent_Change
+            Range("K" & Summary_Table).NumberFormat = "0.00%"
         
       ' Add one row to the summary table
       Summary_Table = Summary_Table + 1
@@ -87,31 +102,5 @@ Dim Ticker_Name As String
     End If
 
   Next i
-
-End Sub
-
-Sub Red_or_Green()
-
-  ' Set loop for conditional formatting
- 
-' Find last row (LR)
-  LR = Cells(Rows.Count, 1).End(xlUp).Row
-  MsgBox (LR)
-  
-  For i = 2 To LR
-
-    If Cells(i, 10).Value < 0 Then
-
-    ' Colour of the cell is green
-    Cells(i, 10).Interior.ColorIndex = 3
-
-    Else
-    
-    ' Colour of the cell is red
-    Cells(i, 10).Interior.ColorIndex = 4
-
-End If
-
-Next i
 
 End Sub
